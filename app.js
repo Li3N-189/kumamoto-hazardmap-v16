@@ -1940,8 +1940,8 @@ function afterLang() {
 
 // ================= 起動 =================
 Promise.all([
-  fetch('data/kumamoto_municipalities.geojson').then(r => r.json()),
-  fetch('data/shelters_kumamoto.json').then(r => r.json()),
+  Promise.resolve(KUMAMOTO_MUNICIPALITIES),  /*fetch('data/kumamoto_municipalities.geojson').then(r => r.json())*/
+  Promise.resolve(SHELTERS_KUMAMOTO),        /*fetch('data/shelters_kumamoto.json').then(r => r.json())*/
 ]).then(([g, sh]) => {
   munis = g.features; shelters = sh.items.filter(x => !x[5]); dirPoints = sh.items.filter(x => x[5]);
   muniLayer = L.geoJSON(g, { style: muniStyle, interactive: false }).addTo(map);
